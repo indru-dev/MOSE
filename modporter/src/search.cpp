@@ -1,24 +1,16 @@
-#include <filesystem>
-#include "search.h"
+#include "h/search.h"
 
-namespace fs = std::filesystem;
+void Modloader::loadmods(const fs::path& moddir) {
+    if(!fs::exists(moddir)) {
+        std::cout << "[err] Mods folder not found at: " << moddir.string();
+        std::cout << "[fix.d] Creating Mods folder...";
+        fs::create_directories(moddir);
 
-bool uemptymods() {
-    bool found = false;
-    
-    if(fs::exists("../../mods") && fs::is_directory("../../mods")) {
-        for (const auto& entry : fs::directory_iterator("../../mods")) {
-            if(entry.is_directory()) {
-                found = true;
-                break;
-            }
+        if(!fs::exists(moddir)) {
+            std::cout << "[CRITICAL] Mods folder cannot be artificially created."
+            << std::endl
+            << ""
         }
     }
-
-    if(found) {
-        return true;
-    } else {
-        return false;
-    }
-
 }
+
