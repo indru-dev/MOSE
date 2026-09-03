@@ -7,9 +7,8 @@ void Modloader::loadmods(const fs::path& moddir) {
         fs::create_directories(moddir);
 
         if(!fs::exists(moddir)) {
-            std::cout << "[CRITICAL] Mods folder cannot be artificially created."
-            << std::endl
-            << ""
+            std::cout << "[CRITICAL] Mods folder cannot be artificially created." << std::endl;
+            core::terminate(EXIT_FAILURE);
         }
     }
 }

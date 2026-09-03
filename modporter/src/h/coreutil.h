@@ -4,6 +4,10 @@
 #include <cstdlib>
 #include <iostream>
 
+namespace core {
+
 [[noreturn]] void terminate(int);
+
+}
 
 #endif

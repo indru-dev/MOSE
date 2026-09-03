@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <filesystem>
 #include <iostream>
+#include <h/coreutil.h>
 
 namespace fs = std::filesystem;
 
