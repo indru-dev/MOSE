@@ -3,12 +3,12 @@ MAKEFILE_VERSION = 1
 
 TARGET = ../modporter
 SOURCE = src/*
-HEADER = h
+HEADER = src/h/*
 
-CCFLAGS = -Wall
+WFLAGS = -Wall -Wextra
 
 $(TARGET): $(SOURCE) $(HEADER)
-	$(CC) $(CCFLAGS) -o $@ $(SOURCE) -I$(HEADER)
+	$(CC) $(WFLAGS) -o $@ $(SOURCE) -I$(HEADER)
 
 clean:
-	del /q /f .\modporter.exe
+	del /q /f ..\modporter.exe
