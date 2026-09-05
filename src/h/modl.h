@@ -27,3 +27,5 @@ namespace lua {
     int luaL_unloadMods(lua_State*);
     
 }
+
+void luaL_modl(lua_State*);

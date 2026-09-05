@@ -1,8 +1,15 @@
-#include <exception>
+#include <iostream>
+#include <lauxlib.h>
+#include <lua.h>
 #include <ostream>
+#include <string>
 #include <util.h>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 using namespace std;
+using namespace std::this_thread;
+using namespace std::chrono;
 
 [[noreturn]] void core::terminate(int code) {
 
@@ -33,4 +40,35 @@ using namespace std;
     << endl << "Bye!";
 
     exit(code);
+}
+
+namespace core::lua {
+
+    int cout(lua_State* L) {
+        std::string msg = luaL_checkstring(L, 1);
+        
+        std::cout << "[LUA] " << msg;
+        return 0;
+    }
+
+    int cerr(lua_State* L) {
+        std::string err = luaL_checkstring(L, 1);
+
+        std::cerr << "[ERR] (lua) " << msg;
+        return 0;
+    }
+
+    int sleep(lua_State* L) {
+        double n = luaL_checknumber(L, 1);
+
+        sleep_for(duration<double>(n));
+        return 0;
+    }
+    
+}
+
+void utilC::registry(lua_State* L) {
+    lua_register(L, "cout", core::lua::cout);
+    lua_register(L, "cerr", core::lua::cerr);
+    lua_register(L, "sleep", core::lua::sleep);
 }

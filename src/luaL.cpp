@@ -3,6 +3,7 @@
 #include <iostream>
 #include <lua.h>
 #include <luaL.h>
+#include <modl.h>
 
 extern "C" {
     #include <lualib.h>
@@ -20,10 +21,20 @@ void luaL_openstate(lua_State* L) {
     }
 }
 
-void luaL_enableClass(coreID ID) {
+void luaL_enableClass(lua_State* L, coreID ID) {
     switch(ID) {
         case coreID::MODLOADER:
-            luaL_modl();
+            luaL_modl(L);
+            break;
+        default:
+            break;
+    }
+}
+
+void luaL_registry(lua_State* L, classID ID) {
+    switch(ID) {
+        case classID::UTIL:
+            utilC::registry(L);
             break;
         default:
             break;
