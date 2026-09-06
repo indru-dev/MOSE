@@ -7,8 +7,8 @@ LIBS = -llua
 
 all: $(TARGET)
 
-$(TARGET): $(SOURCE) $(HEADER)
+$(TARGET): $(SOURCE)
 	$(CXX) $(CXXFLAGS) -o $@ $(SOURCE) $(HEADER) $(LIBS)
 
 clean:
-del /Q /F $(TARGET).exe
+	del /Q /F $(TARGET).exe

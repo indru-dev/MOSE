@@ -1,7 +1,7 @@
 #include "util.h"
 #include <cstdlib>
 #include <iostream>
-#include <lua.h>
+#include <lau.h>
 #include <luaL.h>
 #include <modl.h>
 
@@ -11,7 +11,6 @@ extern "C" {
 }
 
 void luaL_openstate(lua_State* L) {
-    luaL_openlibs(L);
 
     if(luaL_dofile(L, "src/scripts/script.lua") != LUA_OK) {
         std::cerr << "[ERROR] (luaL) Unable to open script: " << lua_tostring(L, -1);

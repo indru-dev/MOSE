@@ -1,6 +1,5 @@
 #include <iostream>
-#include <lauxlib.h>
-#include <lua.h>
+#include <lau.h>
 #include <ostream>
 #include <string>
 #include <util.h>
@@ -24,7 +23,7 @@ using namespace std::chrono;
     cout << "[sys] Entering Stage 1 => luaL"
     << endl << "[sys] Popping luaL stack..."
     << endl << "[sys] Closing luaL libraries..."
-    << endl << "[sys] Waiting for Signal from Lua Script: scirpt.lua"
+    << endl << "[sys] Waiting for Signal from Lua Script: script.lua"
     << endl << "[sys] Terminating Lua state..."
     << endl << "[sys] Entering Stage 2 => _cpp_deinit"
     << endl << "[sys] Freeing Memory..."
@@ -54,7 +53,7 @@ namespace core::lua {
     int cerr(lua_State* L) {
         std::string err = luaL_checkstring(L, 1);
 
-        std::cerr << "[ERR] (lua) " << msg;
+        std::cerr << "[ERR] (lua) " << err;
         return 0;
     }
 

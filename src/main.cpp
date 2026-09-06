@@ -3,15 +3,21 @@
 #include <modl.h>
 #include <util.h>
 
-Modloader loader = Modloader();
+
+namespace core {
+
+    Modloader loader;
+}
 
 int main() {
 
     lua_State* L = luaL_newstate();
-    luaL_openstate(L);
+    luaL_openlibs(L);
 
     luaL_enableClass(L, coreID::MODLOADER);
     luaL_registry(L, classID::UTIL);
+
+    luaL_openstate(L);
     
     lua_close(L);
     return 0;

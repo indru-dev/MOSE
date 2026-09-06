@@ -43,5 +43,4 @@ void Modloader::unloadMods() {
         FreeLibrary(file);
     }
 }
-
  

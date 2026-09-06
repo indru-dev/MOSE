@@ -1,9 +1,8 @@
-#include <lauxlib.h>
-#include <lua.h>
+#include <lau.h>
 #include <modl.h>
 #include <fromcore.h>
 
-Modloader loader = GetFromCore<Modloader>(coreID::MODLOADER);
+Modloader& loader = GetFromCore<Modloader>(coreID::MODLOADER);
 
 int lua::luaL_loadMods(lua_State* L) {
     std::string path = luaL_checkstring(L, 1);
