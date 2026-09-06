@@ -1,3 +1,4 @@
+#include <minwindef.h>
 #include <modl.h>
 namespace fs = std::filesystem;
 
@@ -8,6 +9,10 @@ bool Modloader::checkIfMod(const fs::directory_entry& entry) {
     if(entry.is_symlink()) return false;
 
     return true;
+}
+
+std::vector<HMODULE> Modloader::GetAllMods() {
+    return loaded;
 }
 
 void Modloader::loadMods(std::string path) {
@@ -23,16 +28,16 @@ void Modloader::loadMods(std::string path) {
         HMODULE handle = GetModuleHandleW(native.c_str());
 
         if(handle) {
-            std::wcout << L"Module: " << file.path().filename().wstring() << L" ) was loaded to the handle: " << handle;
+            std::wcout << L"Module: " << file.path().filename().wstring() << L" ) was loaded to the handle: " << handle << std::endl;
             loaded.push_back(temp);
         } else {
-            std::wcerr << L"Module: " << file.path().filename().wstring() << L" ) could not be loaded.";
+            std::wcerr << L"Module: " << file.path().filename().wstring() << L" ) could not be loaded." << std::endl;
         }
     
         DWORD error = GetLastError();
 
         if(error) {
-            std::cerr << "[ERR] Error loading: " << file.path().filename() << ": " << error;
+            std::cerr << "[ERR] Error loading: " << file.path().filename() << ": " << error << std::endl;
         }
         
     }

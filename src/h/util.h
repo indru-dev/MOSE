@@ -17,7 +17,8 @@ namespace utilC {
 }
 
 enum class coreID {
-    MODLOADER
+    MODLOADER,
+    PROCMAN
 };
 
 enum class classID {

@@ -18,7 +18,8 @@ public:
     void loadMods(std::string);
 
     void unloadMods();
-    
+
+    std::vector<HMODULE> GetAllMods();
 };
 
 namespace lua {

@@ -4,6 +4,7 @@
 #include <lau.h>
 #include <luaL.h>
 #include <modl.h>
+#include <proc.h>
 
 extern "C" {
     #include <lualib.h>
@@ -13,7 +14,7 @@ extern "C" {
 void luaL_openstate(lua_State* L) {
 
     if(luaL_dofile(L, "src/scripts/script.lua") != LUA_OK) {
-        std::cerr << "[ERROR] (luaL) Unable to open script: " << lua_tostring(L, -1);
+        std::cerr << "[ERROR] (luaL) Unable to open script: " << lua_tostring(L, -1) << std::endl;
         lua_pop(L, 1);
         std::cin.get();
         core::terminate(EXIT_FAILURE);
@@ -25,6 +26,8 @@ void luaL_enableClass(lua_State* L, coreID ID) {
         case coreID::MODLOADER:
             luaL_modl(L);
             break;
+        case coreID::PROCMAN:
+            luaL_proc(L);
         default:
             break;
     }

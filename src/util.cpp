@@ -1,3 +1,4 @@
+#include <fromcore.h>
 #include <iostream>
 #include <lau.h>
 #include <ostream>
@@ -12,12 +13,12 @@ using namespace std::chrono;
 
 [[noreturn]] void core::terminate(int code) {
 
-    cout << "[sys] Retrieved Termination Signal.";
+    cout << "[sys] Retrieved Termination Signal." << std::endl;
 
     if(code == 0) {
-        cout << "[sys] Termination Signal: EXIT_SUCCESS\n[SYS] Termination Code: 0";
+        cout << "[sys] Termination Signal: EXIT_SUCCESS\n[SYS] Termination Code: 0" << std::endl;
     } else {
-        cerr << "[sys] Termination Signal: EXIT_FAILURE\n[sys] Termination Code: " << code;
+        cerr << "[sys] Termination Signal: EXIT_FAILURE\n[sys] Termination Code: " << code << std:endl;
     }
 
     cout << "[sys] Entering Stage 1 => luaL"
@@ -36,7 +37,10 @@ using namespace std::chrono;
     << endl << "[sys] Shutting Down Program..."
     << endl << "[sys] Entering C++ Exit Procedure 4"
     << endl << "[TERM]"
-    << endl << "Bye!";
+    << endl << "Bye!" << std::endl;
+
+    Modloader& loader = GetFromCore<Modloader>(coreID::MODLOADER);
+    loader.unloadMods();
 
     exit(code);
 }
@@ -46,14 +50,14 @@ namespace core::lua {
     int cout(lua_State* L) {
         std::string msg = luaL_checkstring(L, 1);
         
-        std::cout << "[LUA] " << msg;
+        std::cout << "[LUA] " << msg << "\n" << std::flush;
         return 0;
     }
 
     int cerr(lua_State* L) {
         std::string err = luaL_checkstring(L, 1);
 
-        std::cerr << "[ERR] (lua) " << err;
+        std::cerr << "[ERR] (lua) " << "\n" << std::flush;
         return 0;
     }
 
